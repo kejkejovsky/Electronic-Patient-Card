@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Patient's Observation</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section>
+    <a href="/showpatlist?patient=<%= find %>" class="button"> <- BACK</a>
+    </section>
+    
+    <% if(bundle.entry) { %>
+        <center>
+        <form method="GET" action="/showobservation">
+            <input type="hidden" name="id" value="<%= bundle.entry[0].resource.subject.reference.split('/')[1] %>"/>
+            <input type="hidden" name="find" value="<%= find %>"/>
+            <label>START:</label>
+            <input type="date" name="start" value="<%= start %>">
+            <label>END:</label>
+            <input type="date" name="end" value="<%= end %>">
+            <input type="submit" class='button' value='FILTER'>
+          </form></center>
+        <section>
+    <% for(var i = 0; i < bundle.entry.length; i++) { %>
+
+        <div id='ramka'>
+                ID: <%= bundle.entry[i].resource.id %> <br>
+                PATIENT: <%= bundle.entry[i].resource.subject.reference %> <br>
+                <% if(bundle.entry[i].resource.effectiveDateTime){ %>
+                    DATE: <%= bundle.entry[i].resource.effectiveDateTime %> <br>
+                <% } else if(bundle.entry[i].resource.effectivePeriod){ %>
+                    DATE: <%= bundle.entry[i].resource.effectivePeriod.start %> - <%= bundle.entry[i].resource.effectivePeriod.end %><br>
+                <% } else if(bundle.entry[i].resource.effectiveInstant){ %>
+                    DATE: <%= bundle.entry[i].resource.effectiveInstant %><br>
+                <% } %>
+                STATUS: <%= bundle.entry[i].resource.status %> <br>
+                NOTE: 
+                <% if(bundle.entry[i].resource.text){ %>
+                <%- bundle.entry[i].resource.text.div %>
+                <% }else if(bundle.entry[i].resource.code){ 
+                    if(bundle.entry[i].resource.code.text){ %>
+                    <%= bundle.entry[i].resource.code.text %>
+                    <% } else if(bundle.entry[i].resource.code.coding){ %>
+                        <%= bundle.entry[i].resource.code.coding[0].display %>
+                    <% } %>
+                <% } %>
+                
+                <% if(bundle.entry[i].resource.valueQuantity){ %>
+                <%= bundle.entry[i].resource.valueQuantity.value %> <%= bundle.entry[i].resource.valueQuantity.unit %>
+                <%
+
+                } %><br>
+            </div>
+            
+    <% } %>
+</section>
+    <% } else { %>
+        <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            Data of patient's observation not found
+          </div> 
+    <% } %>
+   
+</body>
+</html>

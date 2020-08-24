@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Medication</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a href="/showmedicationstate?id=<%= pat %>&find=<%= find %>" class="button">RETURN</a>
+
+    
+            <% if(bundle.entry) { %>
+                <section>
+             <% for(var i = 0; i < bundle.entry.length; i++) { %>
+
+                <div id='ramka'>
+                        ID: <%= bundle.entry[i].resource.id %> <br>
+                        NAME: <%- bundle.entry[i].resource.text.div %> <br>
+                        
+                </div>
+
+            <% } %>  
+        </section>
+            <% } else { %>
+                <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            Data of medication not found
+          </div> 
+            <% } %>
+        
+</body>
+</html>

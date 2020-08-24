@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Patient List</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <form method="GET" action="/showpatlist">
+        <input type="text" placeholder="Wpisz nazwisko pacjenta" name="patient" value="<%= find %>" />
+        <input type="submit" value="SEARCH" class="button"/>
+    </form>
+    <table id='custom'>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>BIRTH DATE</th>
+            <th>GENDER</th>
+            <th>OBSERVATIONS</th>
+            <th>MEDICATION STATEMENTS</th>
+        </tr>
+    <% if(bundle.entry) { %>
+        <% for(var i = 0; i < bundle.entry.length; i++) { %>
+                <tr>
+            <td><%= bundle.entry[i].resource.id %></td>
+            <td><% if(bundle.entry[i].resource.name) { %>
+                <%= bundle.entry[i].resource.name[0].prefix %>
+                <%= bundle.entry[i].resource.name[0].given %>
+                <%= bundle.entry[i].resource.name[0].family %>
+                <% } %></td>
+            <td><%= bundle.entry[i].resource.birthDate %></td>
+            <td><%= bundle.entry[i].resource.gender %></td>
+            <td><a href="/showobservation?id=<%= bundle.entry[i].resource.id %>&find=<%= find %>" class="button">Observation</a></td>
+            <td><a href="/showmedicationstate?id=<%= bundle.entry[i].resource.id %>&find=<%= find %>" class="button">MedicationStatement</a></td>
+        </tr>
+        <% } %>     
+    <% } else { %>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            Data of patient not found
+          </div> 
+    <% } %>
+</table>
+</body>
+</html>

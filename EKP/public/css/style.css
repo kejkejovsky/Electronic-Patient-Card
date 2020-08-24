@@ -1,0 +1,83 @@
+*{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.button {
+    text-decoration: none;
+    background-color: #070897;
+    color: white;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+.button:hover{
+  text-decoration: none;
+    background-color: #070897;
+    color: white; 
+    border-top: 1px solid #300697;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    border-left: 1px solid #300697;
+}
+#custom {
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #070897;
+  color: white;
+}
+ /* The alert message box */
+ .alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+} 
+section{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+	#ramka {
+    width: 20%;
+  transition: box-shadow .3s;
+  padding: 20px;
+  margin: 5px;
+  border-radius:10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  float: left;
+  
+}
+#ramka:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+}
